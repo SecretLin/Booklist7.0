@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_add_question"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffff"
+    >
+    <include layout="@layout/top_add"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="8dp"
+        android:gravity="start"
+        android:hint="请输入你的问题...."
+        android:background="@null"
+        android:id="@+id/etQuestion" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSelectBook"
+        android:layout_marginStart="16dp"
+        android:background="@mipmap/selectbook"
+        android:layout_marginBottom="10dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="376dp"
+        android:layout_height="52dp"
+        android:layout_below="@+id/btnSelectBook"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        android:id="@+id/layout_book"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:id="@+id/ivCover"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            />
+        <TextView
+            android:id="@+id/tvBookname"
+            android:layout_toEndOf="@+id/ivCover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="9dp"
+            android:text="书名"
+            android:textColor="#333333"
+            android:textSize="11dp" />
+
+        <TextView
+            android:id="@+id/tvAuthor"
+            android:layout_toEndOf="@+id/ivCover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvBookname"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="9dp"
+            android:text="作者"
+            android:textSize="11dp" />
+    </RelativeLayout>
+</LinearLayout>

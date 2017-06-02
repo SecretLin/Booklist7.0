@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/home">
+
+
+
+    <Button
+        android:layout_width="210dp"
+        android:layout_height="34dp"
+        android:background="@mipmap/editext_bg"
+        android:text="注册"
+        android:textColor="#ffff"
+        android:textSize="20dp"
+        android:id="@+id/btnRegist_Home"
+        android:layout_marginBottom="17dp"
+        android:layout_above="@+id/btnLogin_Home"
+        android:layout_alignStart="@+id/btnLogin_Home" />
+
+    <Button
+        android:layout_width="210dp"
+        android:layout_height="34dp"
+        android:text="登录"
+        android:textColor="#5CAB7D"
+        android:textSize="20dp"
+        android:background="@mipmap/editext_bg"
+        android:id="@+id/btnLogin_Home"
+        android:layout_marginBottom="99dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="随便逛逛"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="70dp"
+        android:layout_marginStart="155dp"
+        android:id="@+id/tvSkipLogin"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="——————————其他方式登录——————————"
+        android:textSize="12dp"
+        android:textColor="#ffff"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        />
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@mipmap/qq"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="130dp"
+        android:id="@+id/ivQQlogin"
+        />
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@mipmap/sina"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_toEndOf="@+id/ivQQlogin"
+        android:id="@+id/ivSinaLogin"
+        android:layout_marginStart="40dp"
+        />
+</RelativeLayout>

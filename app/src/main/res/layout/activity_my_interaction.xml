@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+  >
+    <include layout="@layout/top"/>
+    <ImageButton
+        android:background="@mipmap/mypost"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:id="@+id/btnmyPost"
+        />
+    <ImageButton
+        android:background="@mipmap/receivecomment"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:id="@+id/btnreceiveComment"
+        android:layout_below="@+id/btnmyPost"
+        />
+    <ImageButton
+        android:background="@mipmap/likedbook"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:id="@+id/btnlikedbook"
+        android:layout_below="@+id/btnreceiveComment"
+        />
+</LinearLayout>

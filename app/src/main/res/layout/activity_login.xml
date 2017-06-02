@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/login"
+
+    >
+
+
+
+
+    <EditText
+        android:layout_width="273dp"
+        android:layout_height="48dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:hint="用户名"
+        android:paddingLeft="23dp"
+        android:textColorHint="#949292"
+        android:background="@mipmap/editext_bg"
+        android:id="@+id/etUsername_Login"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="273dp"
+        android:layout_height="48dp"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:paddingLeft="23dp"
+        android:textColorHint="#949292"
+        android:hint="密码"
+
+        android:background="@mipmap/editext_bg"
+        android:id="@+id/etPW_Login"
+        android:layout_below="@+id/etUsername_Login"
+        android:layout_alignStart="@+id/etUsername_Login"
+        android:layout_marginTop="20dp" />
+
+    <ImageButton
+        android:layout_width="216dp"
+        android:layout_height="44dp"
+        android:text="登录"
+        android:background="@mipmap/btnlogin"
+        android:id="@+id/btnLogin"
+        android:layout_below="@+id/etPW_Login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="忘记密码"
+        android:id="@+id/tvForget"
+        android:layout_marginBottom="12dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="13dp" />
+    <ImageButton
+        android:id="@+id/btnClear"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_above="@id/etPW_Login"
+        android:layout_marginStart="289dp"
+        android:layout_marginBottom="16dp"
+        android:background="@mipmap/clear"
+        android:visibility="invisible" />
+
+</RelativeLayout>

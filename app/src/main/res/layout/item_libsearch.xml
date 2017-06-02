@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_marginTop="5dp"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@mipmap/libicon"
+        android:layout_marginLeft="12dp"
+        android:id="@+id/ivLibicon"
+        android:layout_marginTop="3dp"
+        />
+    <TextView
+        android:layout_width="245dp"
+        android:layout_height="wrap_content"
+        android:text="图书馆"
+        android:textSize="16dp"
+        android:layout_toEndOf="@+id/ivLibicon"
+        android:layout_marginLeft="3dp"
+        android:id="@+id/tvLib"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="可供出借"
+        android:textSize="16dp"
+        android:layout_alignParentRight="true"
+        android:id="@+id/tvStatus"
+        android:layout_marginRight="10dp"
+        />
+
+</RelativeLayout>

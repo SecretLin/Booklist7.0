@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.SwipeRefreshLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/refresh"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/tvHit"
+    android:layout_marginTop="10dp">
+
+    <!--<me.hwang.library.widgit.SmartRefreshLayout-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+    <!--android:id="@+id/refresh"-->
+    <!--app:pullBackground="@color/colorPrimary"-->
+    <!--app:enablePullDown="false"-->
+    <!--app:enablePullUp="true">-->
+
+
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffff">
+            <include layout="@layout/top_ground"
+                android:id="@+id/top"/>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp"
+                android:layout_below="@+id/top"
+                android:layout_width="match_parent"
+                android:layout_height="142dp" />
+
+            <LinearLayout
+                android:id="@+id/layout_point"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/vp"
+                android:gravity="center|bottom"
+                android:orientation="horizontal"> <!--小白点的位置-->
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvNewBook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_point"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:text="新书推荐"
+                android:textColor="#666666"
+                android:textSize="15dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvNewBook"
+                android:layout_width="match_parent"
+                android:layout_height="113dp"
+                android:layout_below="@+id/tvNewBook"
+                android:layout_marginStart="6dp" />
+
+            <TextView
+                android:id="@+id/tvHit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rvNewBook"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:text="热门推荐"
+                android:textColor="#666666"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/tv_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/rvNewBook"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="18dp"
+                android:text="更多"
+                android:textColor="#5CAB7D"
+                android:textSize="15dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_below="@+id/tv_more"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rv"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:text="近期动态"
+                android:textColor="#666666"
+                android:textSize="15dp"
+                android:id="@+id/tvTimeSort"
+                />
+            <!--<com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_below="@+id/tvTimeSort"-->
+                <!--android:id="@+id/rvTimeSort"/>-->
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tvTimeSort"
+                android:id="@+id/rvTimeSort"
+                />
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/bigFAB"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:menu_backgroundColor="#b5ffffff"
+        app:menu_colorNormal="#5CAB7D"
+        app:menu_colorPressed="#5CAB7D"
+        app:menu_colorRipple="#99FFFFFF"
+        app:menu_labels_colorNormal="#D2D0D0"
+        app:menu_labels_hideAnimation="@anim/jump_to_down"
+        app:menu_labels_showAnimation="@anim/jump_from_down"
+        app:menu_labels_textColor="#333333"
+        app:menu_showShadow="true"
+        android:layout_alignParentTop="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/btnQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/question"
+            app:fab_colorNormal="#D2D0D0"
+            app:fab_colorPressed="#D2D0D0"
+            app:fab_colorRipple="#99FFFFFF"
+            app:fab_label="提问"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/btnShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/share"
+            app:fab_colorNormal="#D2D0D0"
+            app:fab_colorPressed="#D2D0D0"
+            app:fab_colorRipple="#99FFFFFF"
+            app:fab_label="分享"
+            app:fab_size="mini" />
+    </com.github.clans.fab.FloatingActionMenu>
+    </RelativeLayout>
+<!--</me.hwang.library.widgit.SmartRefreshLayout>-->
+</android.support.v4.widget.SwipeRefreshLayout>

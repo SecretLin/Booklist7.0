@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="25dp"
+        android:background="@mipmap/decoration"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="14dp"
+        android:id="@+id/ivKinds"
+        />
+    <TextView
+        android:text="计算机"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_height="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="29dp"
+        android:id="@+id/tvKinds"
+        />
+    <com.example.secret.booklist60.utils.Flowlayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:layout_marginStart="4dp"
+        android:id="@+id/com_flowlayout"/>
+    <com.example.secret.booklist60.utils.Flowlayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/com_flowlayout"
+
+        android:layout_marginStart="4dp"
+        android:id="@+id/com_flowlayout_more"
+        android:visibility="gone"
+        />
+</RelativeLayout>

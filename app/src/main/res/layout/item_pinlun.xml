@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@mipmap/pinlun_bg"
+    android:id="@+id/relativeLayout"
+    android:paddingBottom="3dp"
+    >
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/head"
+        android:id="@+id/ivTouxiang_Pinlun"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="用户名"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="64dp"
+        android:textColor="#333333"
+        android:layout_marginTop="29dp"
+        android:textSize="16dp"
+        android:id="@+id/tvUsername_Pinlun" />
+
+    <TextView
+        android:text="评论内容"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvComment"
+        android:textColor="#333333"
+        android:layout_marginTop="75dp"
+        android:layout_marginLeft="64dp"
+        android:textSize="14dp"
+        />
+
+    <TextView
+        android:text="2016-10-27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTime"
+        android:textSize="12dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginLeft="64dp"
+        android:textColor="#BFBFBF"
+        />
+
+    <ImageButton
+        android:id="@+id/ib_like"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="@mipmap/dislike"
+        android:layout_marginLeft="320dp"
+        android:layout_marginTop="72dp"
+        />
+    <TextView
+        android:id="@+id/tvlike_count"
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ib_like"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/ib_like"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_child"
+        android:background="#eeeeee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvComment"
+        android:layout_toEndOf="@+id/ivTouxiang_Pinlun"
+        android:layout_alignStart="@+id/tvUsername_Pinlun"/>
+
+    <TextView
+        android:id="@+id/tv_more"
+        android:background="#eeeeee"
+        android:visibility="gone"
+        android:textColor="#5CAB7D"
+        android:layout_centerHorizontal="true"
+        android:layout_toEndOf="@+id/ivTouxiang_Pinlun"
+        android:layout_marginStart="5dp"
+        android:paddingStart="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rv_child"
+        android:layout_marginBottom="3dp"
+        />
+</RelativeLayout>

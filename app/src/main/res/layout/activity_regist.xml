@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/login"
+    tools:context="com.example.secret.booklist50.UI.RegistActivity">
+
+    <EditText
+        android:id="@+id/etUsername_Regist"
+        android:layout_width="273dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="255dp"
+        android:background="@mipmap/editext_bg"
+        android:hint="请输入用户名"
+        android:inputType="textEmailAddress"
+        android:maxLength="12"
+        android:paddingLeft="24dp"
+        android:textColorHint="#949292" />
+
+    <EditText
+        android:id="@+id/etEmail_Regist"
+        android:layout_width="273dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/etUsername_Regist"
+        android:layout_below="@+id/etUsername_Regist"
+        android:layout_marginTop="20dp"
+        android:background="@mipmap/editext_bg"
+        android:ems="10"
+        android:hint="请输入邮箱"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="24dp"
+        android:textColorHint="#949292" />
+
+    <EditText
+        android:id="@+id/etPW_Regist"
+        android:layout_width="273dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/etEmail_Regist"
+        android:layout_below="@+id/etEmail_Regist"
+        android:layout_marginTop="20dp"
+        android:background="@mipmap/editext_bg"
+        android:ems="10"
+        android:hint="请输入6~10位的密码"
+
+        android:inputType="textPassword"
+        android:paddingLeft="24dp"
+        android:textColorHint="#949292" />
+
+    <EditText
+        android:id="@+id/etConPW_Regist"
+        android:layout_width="273dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/etPW_Regist"
+        android:layout_below="@+id/etPW_Regist"
+
+        android:layout_marginTop="20dp"
+        android:background="@mipmap/editext_bg"
+        android:ems="10"
+        android:hint="请再一次输入密码"
+
+        android:inputType="textPassword"
+        android:paddingLeft="24dp"
+        android:textColorHint="#949292" />
+
+    <ImageButton
+        android:id="@+id/btnRegist"
+        android:layout_width="216dp"
+        android:layout_height="44dp"
+        android:layout_below="@+id/etConPW_Regist"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+
+        android:background="@mipmap/regist"
+        android:text="注册" />
+
+    <TextView
+        android:id="@+id/tvPWStrong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/etEmail_Regist"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="32dp"
+        android:text="弱"
+        android:textColor="#747474"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/btnClear"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_above="@+id/etEmail_Regist"
+        android:layout_marginBottom="11dp"
+        android:layout_toEndOf="@+id/btnRegist"
+        android:background="@mipmap/clear"
+        android:visibility="invisible" />
+
+
+</RelativeLayout>
