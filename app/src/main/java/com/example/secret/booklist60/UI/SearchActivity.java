@@ -52,7 +52,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
             @Override
             public void onItemClick(View view,int position) {
 
-                Intent intent = new Intent(SearchActivity.this, BookListDetailActivity.class);
+                Intent intent = new Intent(SearchActivity.this, BookDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("Book",adapter.getItem(position));
                 intent.putExtras(bundle);

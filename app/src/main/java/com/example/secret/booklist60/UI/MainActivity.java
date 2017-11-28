@@ -173,6 +173,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         fragments = new ArrayList<>();
         Fragment groundFragment = new GroundFragment();
         Fragment booklistFragment = new BookFragment();
+//        Fragment booklistFragment = new BookListFragment1();
         Fragment meFragment = new MeFragment();
         fragments.add(groundFragment);
         fragments.add(booklistFragment);
@@ -319,7 +320,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onDestroy();
         EventBus.getDefault().unregister(this);
 
-        BmobQuery.clearAllCachedResults(this);
+
     }
 
     @Override

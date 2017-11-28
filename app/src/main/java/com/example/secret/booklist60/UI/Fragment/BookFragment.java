@@ -2,8 +2,10 @@ package com.example.secret.booklist60.UI.Fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.secret.booklist60.Adapter.BookAdapter;
@@ -20,13 +24,15 @@ import com.example.secret.booklist60.DataBase.History;
 import com.example.secret.booklist60.DataBase.MyUser;
 import com.example.secret.booklist60.R;
 import com.example.secret.booklist60.RecyclerItemClickListener;
-import com.example.secret.booklist60.UI.BookListDetailActivity;
-import com.example.secret.booklist60.UI.SearchActivity;
+import com.example.secret.booklist60.UI.BookDetailActivity;
 import com.example.secret.booklist60.UI.SelectKindsActivity;
 import com.example.secret.booklist60.org.afinal.simplecache.ACache;
+import com.example.secret.booklist60.utils.MyShadowProperty;
+import com.example.secret.booklist60.utils.MyShadowViewDrawable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +45,8 @@ import cn.bmob.v3.listener.DeleteListener;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 
+import static com.example.secret.booklist60.Adapter.NewBookAdapter.dip2px;
+
 /**
  * Created by Secret on 2016/8/27.
  * 书单排列（书城）
@@ -50,6 +58,8 @@ public class BookFragment extends Fragment implements View.OnClickListener {
     ImageButton btnLevelSort, btnCountSort, btnKinds,btnSearch;
     String id;
     SwipeRefreshLayout refreshLayout;
+    ImageView ivBookList,ivBook;
+    LinearLayout layout_top;
 
     ACache aCache;
     JSONArray arrays = null;
@@ -65,12 +75,38 @@ public class BookFragment extends Fragment implements View.OnClickListener {
     }
 
     private void init(View view) {
+
+        //培钿修改，点击书单按钮，跳转到书单页
+        ivBook=(ImageView)view.findViewById(R.id.iv_book);
+        ivBookList=(ImageView)view.findViewById(R.id.iv_bookList);
+        ivBookList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getChildFragmentManager()
+                        .beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.id_contain,new newBookListFragment())
+                        .commit();
+            }
+        });
+
+        //设置顶部标题栏阴影
+        layout_top = (LinearLayout) view.findViewById(R.id.top);
+        MyShadowProperty sp = new MyShadowProperty()
+                .setShadowColor(Color.argb(255,238,238,238))
+                .setShadowDy(dip2px(getContext(), 0.5f))
+                .setShadowRadius(dip2px(getContext(), 2))
+                .setShadowSide(MyShadowProperty.BOTTOM );
+        MyShadowViewDrawable sd = new MyShadowViewDrawable(sp, Color.WHITE, 0, 0);
+        ViewCompat.setBackground(layout_top, sd);
+        ViewCompat.setLayerType(layout_top, ViewCompat.LAYER_TYPE_SOFTWARE, null);
+
         btnLevelSort = (ImageButton) view.findViewById(R.id.btnScoreSort);
         btnCountSort = (ImageButton) view.findViewById(R.id.btnCountSort);
-        btnSearch = (ImageButton) view.findViewById(R.id.btnSearch);
+//        btnSearch = (ImageButton) view.findViewById(R.id.btnSearch);
         btnKinds = (ImageButton) view.findViewById(R.id.kinds);
         btnKinds.setOnClickListener(this);
-        btnSearch.setOnClickListener(this);
+//        btnSearch.setOnClickListener(this);
         btnLevelSort.setOnClickListener(this);
         btnCountSort.setOnClickListener(this);
 
@@ -87,7 +123,7 @@ public class BookFragment extends Fragment implements View.OnClickListener {
 
                 isExist(adapter.getItem(position));
 
-                Intent intent = new Intent(getContext(), BookListDetailActivity.class);
+                Intent intent = new Intent(getContext(), BookDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("Book", adapter.getItem(position));
                 intent.putExtras(bundle);
@@ -110,7 +146,7 @@ public class BookFragment extends Fragment implements View.OnClickListener {
         });
 
 
-//        aCache = ACache.get(getContext());
+        aCache = ACache.get(getContext());
         //下拉刷新
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -173,22 +209,41 @@ public class BookFragment extends Fragment implements View.OnClickListener {
         }
         //默认情况下的排序
         else {
-            try{
+            if (arrays==null) {
+                System.out.println("从数据库获取");
+                final JSONArray arrayList = new JSONArray();
                 BmobQuery<Book> query = new BmobQuery<>();
-
-                //判断是否有缓存，该方法必须放在查询条件（如果有的话）都设置完之后再来调用才有效，就像这里一样。
-                boolean isCache = query.hasCachedResult(getContext(),Book.class);
-                System.out.println("------------isCache:"+isCache);
-                if(isCache){
-                    query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-                }else{
-                    query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ONLY);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-                }
                 query.order(order);
                 query.findObjects(getActivity(), new FindListener<Book>() {
                     @Override
                     public void onSuccess(List<Book> list) {
 
+                        for (int i = 0; i < list.size(); i++) {
+                            Book book = list.get(i);
+                            try {
+                                JSONObject object = new JSONObject();
+                                object.put("name", book.getName().toString());
+                                object.put("objectId", book.getObjectId().toString());
+                                object.put("cover", book.getCover());
+                                object.put("introduction", book.getDesc());
+                                object.put("doubanScore", book.getScore());
+                                if (book.getAuthor() != null) {
+                                    object.put("author", book.getAuthor());
+                                }
+                                if (book.getCount() != null) {
+                                    object.put("count", book.getCount());
+                                }
+                                if (book.getLibID() != null) {
+                                    object.put("libId", book.getLibID());
+                                }
+                                arrayList.put(object);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        aCache.put("booklist", arrayList,2*ACache.TIME_DAY);
+                        arrays = aCache.getAsJSONArray("booklist");
                         adapter.bindData(list);
                         adapter.notifyDataSetChanged();
                         progressDialog.dismiss();
@@ -199,13 +254,55 @@ public class BookFragment extends Fragment implements View.OnClickListener {
 
                     }
                 });
-
-            }catch (Exception ex){
-                System.out.println("----------ex:"+ex.getMessage());
+            } else {
+                readFromAcache();
             }
 
         }
     }
+    //从缓存中获取
+    private void readFromAcache() {
+        JSONArray arrayList1 = aCache.getAsJSONArray("booklist");
+        List<Book> books = new ArrayList<>();
+
+        System.out.println("从缓存中获取");
+        for (int i = 0; i < arrayList1.length(); i++) {
+            try {
+                Book book = new Book();
+                book.setName(arrayList1.getJSONObject(i).getString("name"));
+                book.setObjectId(arrayList1.getJSONObject(i).getString("objectId"));
+                if (arrayList1.getJSONObject(i).optString("author").equals("")){
+                    book.setAuthor(null);
+                }
+                else {
+                    book.setAuthor(arrayList1.getJSONObject(i).optString("author"));
+                }
+
+                if (arrayList1.getJSONObject(i).optString("libId").equals("")){
+                    book.setLibID(null);
+                }
+                else {
+                    book.setLibID(arrayList1.getJSONObject(i).optString("libId"));
+                }
+
+                if (arrayList1.getJSONObject(i).optString("count").equals("")){
+                    book.setCount(0);
+                }
+                else {
+                    book.setCount(arrayList1.getJSONObject(i).optInt("count"));
+                }
+                book.setCover(arrayList1.getJSONObject(i).getString("cover"));
+                book.setDesc(arrayList1.getJSONObject(i).getString("introduction"));
+                book.setScore(Double.parseDouble(arrayList1.getJSONObject(i).getString("doubanScore")));
+                books.add(book);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        adapter.bindData(books);
+        adapter.notifyDataSetChanged();
+    }
+
 
     //属于前端种类的排序
     public void queryByKinds(String order,String type) {
@@ -315,11 +412,11 @@ public class BookFragment extends Fragment implements View.OnClickListener {
                 btnCountSort.setBackgroundResource(R.mipmap.tuijian_pressed);
                 break;
             //搜索
-            case R.id.btnSearch:
-
-                startActivity(new Intent(getContext(), SearchActivity.class));
-
-                break;
+//            case R.id.btnSearch:
+//
+//                startActivity(new Intent(getContext(), SearchActivity.class));
+//
+//                break;
             //选择种类
             case R.id.kinds:
 
@@ -333,8 +430,8 @@ public class BookFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-
         init(getView());
+        arrays = aCache.getAsJSONArray("booklist");
         query("-score");
         scrollToPosition();
     }
@@ -342,7 +439,7 @@ public class BookFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //aCache.clear();
+        aCache.clear();
         BmobQuery.clearAllCachedResults(getContext());
     }
 

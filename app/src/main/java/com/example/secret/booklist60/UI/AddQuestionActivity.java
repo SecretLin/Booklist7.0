@@ -118,7 +118,7 @@ public class AddQuestionActivity extends Activity {
                     MyUser currentUser = BmobUser.getCurrentUser(AddQuestionActivity.this, MyUser.class);
                     Ground ground = new Ground();
                     ground.setUser(currentUser);
-
+                    ground.setType("question");
                     ground.setContent(etQuestion.getText().toString());
                     ground.setBook(book);
                     ground.save(AddQuestionActivity.this, new SaveListener() {

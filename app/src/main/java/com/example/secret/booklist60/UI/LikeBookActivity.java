@@ -53,7 +53,7 @@ public class LikeBookActivity extends Activity {
             @Override
             public void onItemClick(View view, final int position) {
 
-                Intent intent = new Intent(LikeBookActivity.this, BookListDetailActivity.class);
+                Intent intent = new Intent(LikeBookActivity.this, BookDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("Book", adapter.getItem(position).getBook());
                 intent.putExtras(bundle);

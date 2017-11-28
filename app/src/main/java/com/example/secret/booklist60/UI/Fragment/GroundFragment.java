@@ -288,7 +288,7 @@ public class GroundFragment extends Fragment {
         }else{
             query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
         }
-        query.include("user,booklist");
+        query.include("user,book");
         query.order("-count");
         query.setLimit(3);
         query.findObjects(getContext(), new FindListener<Ground>() {
@@ -308,61 +308,86 @@ public class GroundFragment extends Fragment {
     List<MyUser> followers = new ArrayList<>();
     List<Ground> dongtais = new ArrayList<>();
     private void queryDongtai(){
-        BmobQuery<Follow_Fans> queryFollower = new BmobQuery<>();
-        MyUser currentUser = BmobUser.getCurrentUser(getContext(),MyUser.class);
-        //判断是否有缓存，该方法必须放在查询条件（如果有的话）都设置完之后再来调用才有效，就像这里一样。
-        boolean isCache = queryFollower.hasCachedResult(getContext(),Follow_Fans.class);
-        if(isCache){
-            queryFollower.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-        }else{
-            queryFollower.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-        }
-        queryFollower.addWhereEqualTo("Fans",new BmobPointer(currentUser));
-        queryFollower.findObjects(getContext(), new FindListener<Follow_Fans>() {
+
+//        BmobQuery<Follow_Fans> queryFollower = new BmobQuery<>();
+//        MyUser currentUser = BmobUser.getCurrentUser(getContext(),MyUser.class);
+//        //判断是否有缓存，该方法必须放在查询条件（如果有的话）都设置完之后再来调用才有效，就像这里一样。
+//        boolean isCache = queryFollower.hasCachedResult(getContext(),Follow_Fans.class);
+//        if(isCache){
+//            queryFollower.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
+//        }else{
+//            queryFollower.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
+//        }
+//        queryFollower.addWhereEqualTo("Fans",new BmobPointer(currentUser));
+//        queryFollower.findObjects(getContext(), new FindListener<Follow_Fans>() {
+//            @Override
+//            public void onSuccess(List<Follow_Fans> list) {
+//                if (!list.isEmpty()){
+//                    for (Follow_Fans ff : list){
+//                        followers.add(ff.getFollower());
+//                    }
+//                    System.out.println("---------size:"+list.size());
+//                }
+//                BmobQuery<Ground> query = new BmobQuery<>();
+//                query.addWhereContainedIn("user",followers);
+//                query.include("user,book");
+//                boolean isCache = query.hasCachedResult(getContext(),Ground.class);
+//                if(isCache){
+//                    query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
+//                }else{
+//                    query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
+//                }
+//                query.findObjects(getActivity(), new FindListener<Ground>() {
+//                    @Override
+//                    public void onSuccess(List<Ground> list) {
+//                        if (!list.isEmpty()){
+//                            dongtais.addAll(list);
+//                        }
+//
+//                        BmobQuery<Ground> query1 = new BmobQuery<Ground>();
+//                        if (followers!=null){
+//                            query1.addWhereNotContainedIn("user",followers);
+//                        }
+//
+//                        query1.order("-createdAt");
+//                        query1.include("user,book");
+//                        query1.findObjects(getActivity(), new FindListener<Ground>() {
+//                            @Override
+//                            public void onSuccess(List<Ground> list) {
+//                                dongtais.addAll(list);
+//                                TimeAdapter.bindData(dongtais);
+//                                TimeAdapter.notifyDataSetChanged();
+//                            }
+//
+//                            @Override
+//                            public void onError(int i, String s) {
+//
+//                            }
+//                        });
+//                    }
+//
+//                    @Override
+//                    public void onError(int i, String s) {
+//
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onError(int i, String s) {
+//
+//            }
+//        });
+
+
+        BmobQuery<Ground> query = new BmobQuery<>();
+        query.order("-createdAt");
+        query.include("user,book");
+        query.findObjects(getContext(), new FindListener<Ground>() {
             @Override
-            public void onSuccess(List<Follow_Fans> list) {
-                if (!list.isEmpty()){
-                    for (Follow_Fans ff : list){
-                        followers.add(ff.getFollower());
-                    }
-                    System.out.println("---------size:"+list.size());
-                }
-                BmobQuery<Ground> query = new BmobQuery<>();
-                query.addWhereContainedIn("user",followers);
-                query.include("user,booklist");
-                boolean isCache = query.hasCachedResult(getContext(),Ground.class);
-                if(isCache){
-                    query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-                }else{
-                    query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-                }
-                query.findObjects(getActivity(), new FindListener<Ground>() {
-                    @Override
-                    public void onSuccess(List<Ground> list) {
-                        dongtais.addAll(list);
-                        BmobQuery<Ground> query1 = new BmobQuery<Ground>();
-                        query1.order("-createdAt");
-                        query1.include("user,booklist");
-                        query1.findObjects(getActivity(), new FindListener<Ground>() {
-                            @Override
-                            public void onSuccess(List<Ground> list) {
-                                dongtais.addAll(list);
-                                TimeAdapter.bindData(dongtais);
-                                TimeAdapter.notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public void onError(int i, String s) {
-
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onError(int i, String s) {
-
-                    }
-                });
+            public void onSuccess(List<Ground> list) {
+                TimeAdapter.bindData(list);
+                TimeAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -370,7 +395,6 @@ public class GroundFragment extends Fragment {
 
             }
         });
-
 
     }
 
@@ -386,7 +410,7 @@ public class GroundFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-//        query();
+        queryDongtai();
         if (bigFAB.isOpened()){
             bigFAB.close(true);
         }

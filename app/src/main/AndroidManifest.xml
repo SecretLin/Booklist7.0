@@ -57,17 +57,16 @@
         </activity>
         <activity android:name=".UI.RegistActivity" />
         <activity android:name=".UI.LoginActivity" />
-        <activity android:name=".UI.MainActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            />
+        <activity
+            android:name=".UI.MainActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".UI.HistoryRecordActivity" />
         <activity android:name=".UI.SettingActivity" />
         <activity android:name=".UI.SearchActivity" />
         <activity
-            android:name=".UI.BookListDetailActivity"
+            android:name=".UI.BookDetailActivity"
             android:launchMode="singleTask"
-            android:theme="@style/custom_dialog"
-            />
+            android:theme="@style/custom_dialog" />
         <activity
             android:name=".UI.FeedBackActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
@@ -102,6 +101,8 @@
         <activity android:name=".UI.MyPostActivity" />
         <activity android:name=".UI.OthersCommentActivity" />
         <activity android:name=".UI.MoreCommentActivity" />
+        <activity android:name=".UI.newBookListActivity"/>
+
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -170,7 +171,8 @@
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".UI.HitGroundActivity"></activity>
+        <activity android:name=".UI.HitGroundActivity" />
+        <activity android:name=".UI.BookListDetailActivity"></activity>
     </application>
 
 </manifest>

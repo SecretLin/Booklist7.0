@@ -3,4 +3,6 @@
     tools:ignore="MissingTranslation"
     tools:locale="en"
     <string name="app_name" translatable="true">一本书</string>
+    <string name="setByUs" translatable="true">一本书</string>
+
 </resources>

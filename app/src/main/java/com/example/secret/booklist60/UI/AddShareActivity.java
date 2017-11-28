@@ -111,7 +111,7 @@ public class AddShareActivity extends Activity {
                     MyUser currentUser = BmobUser.getCurrentUser(AddShareActivity.this, MyUser.class);
                     Ground ground = new Ground();
                     ground.setUser(currentUser);
-
+                    ground.setType("share");
                     ground.setContent(etShare.getText().toString());
                     ground.setBook(book);
                     ground.save(AddShareActivity.this, new SaveListener() {

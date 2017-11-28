@@ -9,9 +9,9 @@ import cn.bmob.v3.BmobObject;
 public class Booklist extends BmobObject {
 
     private String booklistName;
-    private Integer bookCount;
+
     private MyUser myUser;
-    private Book book;
+
 
     public String getBooklistName() {
         return booklistName;
@@ -21,13 +21,7 @@ public class Booklist extends BmobObject {
         this.booklistName = booklistName;
     }
 
-    public Integer getBookCount() {
-        return bookCount;
-    }
 
-    public void setBookCount(Integer bookCount) {
-        this.bookCount = bookCount;
-    }
 
     public MyUser getMyUser() {
         return myUser;
@@ -37,11 +31,5 @@ public class Booklist extends BmobObject {
         this.myUser = myUser;
     }
 
-    public Book getBook() {
-        return book;
-    }
 
-    public void setBook(Book book) {
-        this.book = book;
-    }
 }

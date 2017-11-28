@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.secret.booklist60.DataBase.All_Comment;
 import com.example.secret.booklist60.DataBase.Ground;
 import com.example.secret.booklist60.R;
-import com.example.secret.booklist60.UI.BookListDetailActivity;
+import com.example.secret.booklist60.UI.BookDetailActivity;
 import com.example.secret.booklist60.utils.MyShadowProperty;
 import com.example.secret.booklist60.utils.MyShadowViewDrawable;
 
@@ -101,7 +101,7 @@ public class HitGroundAdapter extends RecyclerView.Adapter {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP){
                     groundHolder.layout_book.getParent().requestDisallowInterceptTouchEvent(true);
-                    final Intent intent = new Intent(context,BookListDetailActivity.class);
+                    final Intent intent = new Intent(context,BookDetailActivity.class);
                     final Bundle bundle = new Bundle();
                     bundle.putSerializable("Book",list.get(position).getBook());
                     intent.putExtras(bundle);

@@ -6,10 +6,13 @@
     android:background="#ffff"
     android:orientation="vertical">
 
-
+    <FrameLayout
+        android:id="@+id/id_contain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></FrameLayout>
     <include
         android:id="@+id/top"
-        layout="@layout/top_booklist" />
+        layout="@layout/top_booklist1" />
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"
@@ -26,13 +29,13 @@
                 android:layout_height="18dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="121dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:background="@mipmap/score_pressed" />
             <ImageButton
                 android:id="@+id/btnCountSort"
                 android:layout_width="50dp"
                 android:layout_height="18dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_toEndOf="@+id/btnScoreSort"
                 android:layout_marginStart="4dp"
 
@@ -45,7 +48,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv"
                 android:layout_below="@+id/btnScoreSort"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </RelativeLayout>

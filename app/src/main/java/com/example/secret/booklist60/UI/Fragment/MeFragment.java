@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.secret.booklist60.DataBase.Booklist;
 import com.example.secret.booklist60.DataBase.Follow_Fans;
 import com.example.secret.booklist60.DataBase.History;
 import com.example.secret.booklist60.DataBase.MyUser;
@@ -42,6 +43,7 @@ import com.example.secret.booklist60.UI.HistoryRecordActivity;
 import com.example.secret.booklist60.UI.MyInteractionActivity;
 import com.example.secret.booklist60.UI.MyPrivateConversationActivity;
 import com.example.secret.booklist60.UI.SettingActivity;
+import com.example.secret.booklist60.UI.newBookListActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -228,17 +230,17 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     //获取收藏的数目
     private void query_shoucang() {
         MyUser currentUser = BmobUser.getCurrentUser(getActivity(), MyUser.class);
-        BmobQuery<Shoucang> query = new BmobQuery<>();
-        boolean isCache = query.hasCachedResult(getContext(),Shoucang.class);
+        BmobQuery<Booklist> query = new BmobQuery<>();
+        boolean isCache = query.hasCachedResult(getContext(),Booklist.class);
         if(isCache){
             query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
         }else{
             query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ONLY);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
         }
         query.addWhereEqualTo("myUser", new BmobPointer(currentUser));
-        query.findObjects(getActivity(), new FindListener<Shoucang>() {
+        query.findObjects(getActivity(), new FindListener<Booklist>() {
             @Override
-            public void onSuccess(List<Shoucang> list) {
+            public void onSuccess(List<Booklist> list) {
                 //显示个人中心中收藏的数量
                 tvShoucang_count.setText(String.valueOf(list.size()));
 
@@ -276,9 +278,10 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 break;
             //点击上面的“收藏”的布局
             case R.id.layout_Shoucang:
-//                Intent intent4 = new Intent(getContext(), ShoucangActivity.class);
-//                intent4.putExtra("isCurrentUser",true);
-//                startActivity(intent4);
+                Intent intent4 = new Intent(getContext(), newBookListActivity.class);
+                intent4.putExtra("isCurrentUser",true);
+                startActivity(intent4);
+
                 break;
             //点击上面“关注”的布局
             case R.id.layout_Guangzhu:
@@ -380,7 +383,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         BmobQuery<History> query = new BmobQuery<>();
         query.addWhereEqualTo("myUser", new BmobPointer(currentUser));
         query.order("-createdAt");
-        query.include("booklist");
+        query.include("book");
 
         query.findObjects(getActivity(), new FindListener<History>() {
             @Override
